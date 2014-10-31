@@ -5,3 +5,4 @@
 
   roles:
     - base_osx
+    - dotfiles
