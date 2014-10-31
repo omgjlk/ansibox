@@ -1,0 +1,13 @@
+---
+homebrew:
+  taps:
+    - caskroom/cask
+  packages:
+    - brew-cask
+    - ansible
+    #- vim # vim is broken, tabs won't work?
+    - zsh
+    - git
+    - bash-completion
+  casks:
+    - iterm2

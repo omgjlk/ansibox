@@ -1,0 +1,19 @@
+---
+- name: install gcc
+  command: xcode-select --install creates=/usr/bin/gcc
+
+# Assuming homebrew is already installed...
+- name: update homebrew
+  homebrew: update_homebrew=yes
+
+- name: install homebrew taps
+  homebrew_tap: tap={{ item }} state=present
+  with_items: homebrew.taps
+
+- name: install homebrew packages
+  homebrew: name={{ item }} state=upgraded
+  with_items: homebrew.packages
+
+- name: install homebrew casks
+  homebrew_cask: name={{ item }} state=installed
+  with_items: homebrew.casks
