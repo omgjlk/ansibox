@@ -6,3 +6,4 @@
   roles:
     - base_osx
     - dotfiles
+    - { role: bbcdev, tags: dev }
