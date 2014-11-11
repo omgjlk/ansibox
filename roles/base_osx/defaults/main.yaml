@@ -9,5 +9,6 @@ homebrew:
     - zsh
     - git
     - bash-completion
+    - ssh-copy-id
   casks:
     - iterm2
