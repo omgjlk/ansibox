@@ -12,3 +12,4 @@ homebrew:
     - ssh-copy-id
   casks:
     - iterm2
+    - spotify
