@@ -1,3 +1,12 @@
 ---
+- name: temporarily downloading your dotfiles
+  git: src={{dotfiles_repo}} dest=/tmp/ansibox.dotfiles
+  when: dotfiles_repo
+
 - name: sync dotfiles
-  synchronize: src=dotfiles/ dest=~/
+  synchronize: src=/tmp/ansibox.dotfiles/ dest=~/ --exclude=.git
+  when: dotfiles_repo
+
+- name: clear your temporary dotfiles download
+  file: path=/tmp/ansibox.dotfiles state=absent
+
