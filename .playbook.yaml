@@ -13,7 +13,12 @@
       with_first_found:
         - "answers.yaml"
         - "answers.yml"
-
+    - name: Fetch your local supplementary playbook
+      get_url:
+        url: "{{ playbook_url }}"
+        dest: ./local-playbook.yaml
+        force: yes
+      when: "{{ playbook_url | default(false) }}"
   roles:
     - { role: base_osx, when: "ansible_os_family == 'Apple'"  }
     - { role: base_fedora, when: "ansible_distribution == 'Fedora'"  }
