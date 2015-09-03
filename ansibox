@@ -1,2 +1,3 @@
 #!/bin/sh
-":" //#bash wrapper hack; exec ansible-playbook -i hosts ansibox.yaml "$@"
+export ANSIBLE_CONFIG=.ansible.cfg
+":" //#explained here sambal.org/?p=1014; exec ansible-playbook -i hosts .playbook.yaml "$@"
