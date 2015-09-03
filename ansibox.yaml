@@ -1,9 +1,9 @@
 ---
-- name: stuffs
+- name: Ansibox will prepare you
   hosts: localhost
   connection: local
 
   roles:
-    - base_osx
+    - { role: base_osx, when: "ansible_os_family == 'Apple'"  }
+    - { role: base_fedora, when: "ansible_distribution == 'Fedora'"  }
     - dotfiles
-    - { role: bbcdev, tags: dev }

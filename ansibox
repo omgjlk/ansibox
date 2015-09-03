@@ -1,0 +1,2 @@
+#!/bin/sh
+":" //#bash wrapper hack; exec ansible-playbook -i hosts ansibox.yaml "$@"
