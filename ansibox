@@ -1,3 +1,3 @@
 #!/bin/sh
 export ANSIBLE_CONFIG=.ansible.cfg
-":" //#explained here sambal.org/?p=1014; exec ansible-playbook -i hosts .playbook.yaml "$@"
+ansible-playbook -i hosts .playbook.yaml "$@"
