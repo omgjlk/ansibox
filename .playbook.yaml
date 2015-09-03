@@ -2,6 +2,17 @@
 - name: Ansibox will prepare you
   hosts: localhost
   connection: local
+  pre_tasks:
+    - name: Fetch answer data
+      get_url:
+        url: "{{ answers_url }}"
+        dest: ./answers.yaml
+        force: yes
+      when: "{{ answers_url | default(false) }}"
+    - include_vars: "{{ item }}"
+      with_first_found:
+        - "answers.yaml"
+        - "answers.yml"
 
   roles:
     - { role: base_osx, when: "ansible_os_family == 'Apple'"  }
