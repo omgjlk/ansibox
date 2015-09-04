@@ -1,0 +1,29 @@
+# var: git_repos
+#   - this var should contain a hash that lists all repositories to manage
+#     via a specific tagged version or hash. For example:
+#	git_repos:
+#         ntp:
+#           url: git@github.com/puppetlabs/puppet-ntp.git
+#           version: 1.2.0
+#         profile_time:
+#           url: git@github.com/myorg/puppet-profile_time.git
+#           basedir: ~/Development/puppet/profiles
+#
+#
+---
+- name: Ensure development dir exists
+  file:
+    path: "{{ item.value.basedir | default(git_repo_base_dir) }}"
+    state: directory
+    mode: 0755
+  with_dict: git_repos
+
+- name: Update git repos
+  git:
+    repo: "{{ item.value.url }}"
+    accept_hostkey: yes
+    dest: "{{ item.value.basedir | default(git_repo_basedir) }}/{{ item.key }}"
+    version: "{{ item.value.version | default('master') }}"
+    update: yes
+  with_dict: git_repos
+
