@@ -27,3 +27,12 @@
     update: yes
   with_dict: git_repos
 
+# This doesnt seem to work, which is unforunate
+# related: https://github.com/ansible/ansible/pull/1558
+#- name: Set upstream on git repos
+#  git:
+#    repo: "{{ item.value.upstream_url }}"
+#    dest: "{{ item.value.basedir | default(git_repo_basedir) }}/{{ item.key }}"
+#    remote: "upstream"
+#  with_dict: git_repos
+#  when: "{{ item.value.upstream_url }}"
