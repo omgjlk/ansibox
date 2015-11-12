@@ -3,13 +3,13 @@
   yum:
     name: "{{ item }}"
     state: absent
-  with_items: fedora_packages_to_remove
-  when: fedora_packages_to_remove
+  with_items: fedora_packages.remove
+  when: fedora_packages.remove
 
 - name: install all the packages
   yum:
     name: "{{ item }}"
     state: installed
-  with_items: fedora_packages
-  when: fedora_packages
+  with_items: fedora_packages.install
+  when: fedora_packages.install
 
