@@ -13,6 +13,7 @@ homebrew:
     - gnu-time
     - openssl
     - ipcalc
+    - watch
   casks:
     - iterm2
     - spotify
