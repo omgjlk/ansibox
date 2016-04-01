@@ -12,6 +12,7 @@ homebrew:
     - ssh-copy-id
     - gnu-time
     - openssl
+    - ipcalc
   casks:
     - iterm2
     - spotify
