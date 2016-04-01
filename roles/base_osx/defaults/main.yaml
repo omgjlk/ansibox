@@ -11,6 +11,7 @@ homebrew:
     - bash-completion
     - ssh-copy-id
     - gnu-time
+    - openssl
   casks:
     - iterm2
     - spotify
