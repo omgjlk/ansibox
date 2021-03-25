@@ -1,9 +1,8 @@
 ---
 homebrew:
-  taps:
-    - caskroom/cask
+  taps: []
   packages:
-    - brew-cask
+    - cask
     - ansible
     #- vim # vim is broken, tabs won't work?
     - zsh
@@ -14,6 +13,16 @@ homebrew:
     - openssl
     - ipcalc
     - watch
+    - gh
+    - hub
+    - awscli
   casks:
     - iterm2
     - spotify
+    - 1password
+    - slack
+    - mailplane
+    - visual-studio-code
+    - docker
+    - fantastical
+    - zoom

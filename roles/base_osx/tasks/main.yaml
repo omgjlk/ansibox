@@ -8,26 +8,15 @@
 
 - name: install homebrew taps
   homebrew_tap: tap={{ item }} state=present
-  with_items: homebrew.taps
+  loop: "{{ homebrew.taps }}"
 
 - name: install homebrew packages
   homebrew: name={{ item }} state=upgraded
-  with_items: homebrew.packages
+  loop: "{{ homebrew.packages }}"
 
 - name: install homebrew casks
   homebrew_cask: name={{ item }} state=installed
-  with_items: homebrew.casks
-
-- name: discover current shell
-  command: dscl . -read /Users/jkeating UserShell
-  register: usershell
-  changed_when: false
-
-# this will prompt for password :/
-- name: set zsh as shell
-  command: dscl . change /Users/jkeating UserShell /bin/bash /usr/local/bin/zsh
-  sudo: true
-  when: not usershell.stdout|search('zsh')
+  loop: "{{ homebrew.casks }}"
 
 # oh-my-zsh
 - name: clone oh-my-zsh
