@@ -1,6 +1,0 @@
-[submodule "dotfiles"]
-	path = dotfiles
-	url = git@github.com:j2sol/dotfiles.git
-[submodule "bbcdev"]
-	path = roles/bbcdev
-	url = git@github.com:j2sol/ansibox-bbcdev.git

@@ -1,0 +1,54 @@
+# var: git_repos
+#   - this var should contain a hash that lists all repositories to manage
+#     via a specific tagged version or hash. For example:
+#	git_repos:
+#         ntp:
+#           url: git@github.com/puppetlabs/puppet-ntp.git
+#           version: 1.2.0
+#         profile_time:
+#           url: git@github.com/me/puppet-profile_time.git
+#           basedir: ~/Development/puppet/profiles
+#           upstream_url: git@github.com/myorg/puppet-profile_time.git
+#
+#
+---
+- name: Ensure development dir exists
+  file:
+    path: "{{ item.value.basedir | default(git_repo_base_dir) }}"
+    state: directory
+    mode: 0755
+  with_dict: git_repos
+
+- name: Ensure all git repos are cloned
+  git:
+    repo: "{{ item.value.url }}"
+    accept_hostkey: yes
+    dest: "{{ item.value.basedir | default(git_repo_basedir) }}/{{ item.key }}"
+    version: "{{ item.value.version | default('master') }}"
+    update: yes
+  with_dict: git_repos
+
+# This doesnt seem to work, which is unforunate
+# related: https://github.com/ansible/ansible/pull/1558
+#- name: Set upstream on git repos
+#  git:
+#    repo: "{{ item.value.upstream_url }}"
+#    dest: "{{ item.value.basedir | default(git_repo_basedir) }}/{{ item.key }}"
+#    remote: "upstream"
+#  with_dict: git_repos
+#  when: item.value.upstream_url is defined
+
+# Here is the command version
+- name: Set upstream on git repos
+  command: git remote add upstream "{{ item.value.upstream_url }}"
+  args:
+    chdir: "{{ item.value.basedir | default(git_repo_basedir) }}/{{ item.key }}"
+    creates: "{{ item.value.basedir | default(git_repo_basedir) }}/{{ item.key }}/.git/refs/remotes/upstream"
+  with_dict: git_repos
+  when: item.value.upstream_url is defined
+
+- name: Fetch all for the repo
+  command: git fetch --all -p
+  args:
+    chdir: "{{ item.value.basedir | default(git_repo_basedir) }}/{{ item.key }}"
+  with_dict: git_repos

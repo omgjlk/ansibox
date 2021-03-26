@@ -1,9 +1,0 @@
----
-- name: stuffs
-  hosts: localhost
-  connection: local
-
-  roles:
-    - base_osx
-    - dotfiles
-    - { role: bbcdev, tags: dev }

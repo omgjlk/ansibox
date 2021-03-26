@@ -1,0 +1,15 @@
+---
+- name: remove cruft packages
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items: fedora_packages.remove
+  when: fedora_packages.remove
+
+- name: install all the packages
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items: fedora_packages.install
+  when: fedora_packages.install
+

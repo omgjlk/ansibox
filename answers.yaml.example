@@ -1,0 +1,8 @@
+dotfiles_repo: git@github.com:myuser/dotfiles.git
+fedora_packages:
+  install:
+    - my-fave-text-editor
+    - my-alternate-web-browser
+  remove:
+    - something-i-dislike
+    - that-other-thing-i-dislike
