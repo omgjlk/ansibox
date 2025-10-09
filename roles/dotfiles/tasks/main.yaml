@@ -1,3 +1,14 @@
 ---
+- name: cache your dotfiles git repo
+  git:
+    src: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_cachedir }}"
+    update: yes
+  when: "{{ dotfiles_repo | default(false)}}"
+
 - name: sync dotfiles
-  synchronize: src=dotfiles/ dest=~/
+  synchronize:
+    src: "{{ dotfiles_cachedir }}"
+    dest: ~/
+    rsync_opts: --no-motd,--exclude=.git
+  when: "{{ dotfiles_repo | default(false)}}"
